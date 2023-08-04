@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3469403978967750379, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3469403978967750379, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3469403978967750379, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3469403978967750379, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3469403978967750379, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3469403978967750379, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3469403978967750379, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3469403978967750379, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -57,7 +57,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3469403978967750380, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_Name
-      value: TileRoad(S)
+      value: (2, 2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469403978967750380, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
+      propertyPath: m_TagString
+      value: Path
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469403979248855373, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
+      propertyPath: m_text
+      value: 2,2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469403979248855373, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469403979248855373, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469403979248855373, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469403979248855373, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3830589587550953456, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
