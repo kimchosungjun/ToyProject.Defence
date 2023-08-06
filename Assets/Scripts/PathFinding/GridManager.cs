@@ -16,9 +16,10 @@ public class GridManager : MonoBehaviour
 
     public Node GetNode(Vector2Int key)
     {
-        if (grid.ContainsKey(key) == false)
-            return null;
-        return grid[key];
+        if (grid.ContainsKey(key))
+            return grid[key];
+        return null;
+        
     }
 
     public void BlockNode(Vector2Int coordinates)
@@ -26,6 +27,16 @@ public class GridManager : MonoBehaviour
         if (grid.ContainsKey(coordinates))
         {
             grid[coordinates].isWalkable = false;
+        }
+    }
+
+    public void ResetNodes()
+    {
+        foreach(KeyValuePair<Vector2Int,Node> entry in grid)
+        {
+            entry.Value.connectedTo = null;
+            entry.Value.isExplored = false;
+            entry.Value.isPath = false;
         }
     }
 
