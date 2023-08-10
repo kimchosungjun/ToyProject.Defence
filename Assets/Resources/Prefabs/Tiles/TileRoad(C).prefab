@@ -59,6 +59,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileRoad(C)
       objectReference: {fileID: 0}
+    - target: {fileID: 3469403979248855373, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469403979248855373, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5200029405637370773, guid: 9b285e3d4e227394db8e0525882821b2, type: 3}
       propertyPath: isPlaceable
       value: 0
