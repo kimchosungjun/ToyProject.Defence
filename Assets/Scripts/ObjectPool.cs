@@ -8,12 +8,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] [Range(0,50)] int poolSize= 5;
     [SerializeField] [Range(0.1f,30f)] float spawnTimer = 1f;
 
-    GameObject[] pool;
-
-    void Awake()
-    {
-        PopulatePool();
-    }
+    [SerializeField] private GameObject[] pool;
 
     void PopulatePool()
     {
@@ -34,14 +29,14 @@ public class ObjectPool : MonoBehaviour
     {
         while (true)
         {
-            EnableObjectInPool();
             yield return new WaitForSeconds(spawnTimer);
+            EnableObjectInPool();
         }
     }
 
     void EnableObjectInPool()
     {
-        for(int i=0; i <pool.Length; i++)
+        for(int i=0; i <pool.Length; i++)   
         {
             if (!pool[i].activeSelf)
             {

@@ -5,55 +5,58 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class EnemyMover : MonoBehaviour
 {
+    #region Variable
+    [Header("적의 이동속도")]
+    [SerializeField] [Range(0f,5f)] private float speed = 1f;
+    [SerializeField] private Enemy enemy;
     
-    [SerializeField] [Range(0f,5f)] float speed = 1f;
-    List<Node> path = new List<Node>();
-    Enemy enemy;
-    GridManager gridManager;
-    PathFinder pathFinder;
+    private List<Node> path = new List<Node>();
+    private PathFinder pathFinder;
+    public PathFinder PathFinder
+    {
+        get
+        {
+            if (pathFinder == null)
+                pathFinder = GameManager.GridM.PathFinder;
+            return pathFinder;
+        }
+    }
+    #endregion
+    
     void OnEnable()
     {
-        ReturnToStart();
+        ReturnStartingPoint();
         RecalculatePath(true);
     }
 
-    void Awake()
+    void ReturnStartingPoint()
     {
-        enemy = GetComponent<Enemy>();
-        gridManager = FindObjectOfType<GridManager>();
-        pathFinder = FindObjectOfType<PathFinder>();
+        transform.position = GameManager.GridM.GetPositionFromCoordinates(PathFinder.StartCoordiantes);
     }
 
-    void RecalculatePath(bool resetPath)
+    void RecalculatePath(bool _isResetPath = true)
     {
         Vector2Int coordinates = new Vector2Int();
 
-        if (resetPath)
-        {
-            coordinates = pathFinder.StartCoordiantes;
-        }
+        if (_isResetPath)
+            coordinates = PathFinder.StartCoordiantes;
         else
-        {
-            coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
-        }
+            coordinates = GameManager.GridM.GetCoordinatesFromPosition(transform.position);
 
         StopAllCoroutines();
         path.Clear();
-        path = pathFinder.GetNewPath(coordinates);
+        path = PathFinder.SearchRoute();
         StartCoroutine(FollowPath());
     }
 
-    void ReturnToStart()
-    {
-        transform.position = gridManager.GetPositionFromCoordinates(pathFinder.StartCoordiantes);
-    }
+    
 
     IEnumerator FollowPath()
     {
         for(int i=1; i<path.Count; i++)
         {
             Vector3 startPos = transform.position;
-            Vector3 endPos = gridManager.GetPositionFromCoordinates(path[i].coordinates);
+            Vector3 endPos = GameManager.GridM.GetPositionFromCoordinates(path[i].coordinates);
             float travelPercent = 0f;
             transform.LookAt(endPos);
             while(travelPercent<1f)
@@ -65,9 +68,10 @@ public class EnemyMover : MonoBehaviour
         }
         FinishPath();
     }
+
     void FinishPath()
     {
-        enemy.StealGold();
+        //enemy.StealGold();
         gameObject.SetActive(false);
     }
 }

@@ -4,48 +4,51 @@ using UnityEngine;
 
 public class PathFinder : MonoBehaviour
 {
-    [SerializeField] Vector2Int startCoordinates;
+    #region Variable
+    [Header("시작, 끝점")]
+    [SerializeField] private Vector2Int startCoordinates;
+    [SerializeField] private Vector2Int destinationCoordinates;
     public Vector2Int StartCoordiantes { get { return startCoordinates; } }
-    [SerializeField] Vector2Int destinationCoordinates;
     public Vector2Int DestinationCoordinates { get { return destinationCoordinates; } }
-    Node startNode;
-    Node destinationNode;
-    Node currentSearchNode;
+    private Node startNode;
+    private Node destinationNode;
+    private Node currentSearchNode;
+    
+    // Search Variable
+    private Queue<Node> frontier = new Queue<Node>();
+    private Dictionary<Vector2Int, Node> reached = new Dictionary<Vector2Int, Node>();
+    private Vector2Int[] directions = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down };
+    private Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
+    #endregion
 
-    Queue<Node> frontier = new Queue<Node>();
-    Dictionary<Vector2Int, Node> reached = new Dictionary<Vector2Int, Node>();
-    Vector2Int[] directions = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down };
-    GridManager gridManager;
-    Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
-
-    void Awake()
-    {
-        gridManager = FindObjectOfType<GridManager>();
-        if (gridManager != null)
-        {
-            grid = gridManager.Grid;
-            startNode = grid[startCoordinates];
-            destinationNode = grid[destinationCoordinates];
-        }
-            
-    }
+    #region Virtual Method
+    public virtual List<Node> SearchRoute() { return null; }
+    public virtual List<Node> SearchRoute(Vector2Int coordinate) { return null; }
+    #endregion
 
     private void Start()
     {
-
-        GetNewPath();
+        GameManager.GridM.PathFinder = this;
+        //SearchRoute();
+        //grid = GameManager.GridM.Grid;
+        //startNode = grid[startCoordinates];
+        //destinationNode = grid[destinationCoordinates];
+        //GetNewPath();
     }
 
-    public List<Node> GetNewPath()
-    {
-        return GetNewPath(startCoordinates);
-    }
-    public List<Node> GetNewPath(Vector2Int coordinates)
-    {
-        gridManager.ResetNodes();
-        BFS(coordinates);
-        return BuildPath();
-    }
+    public virtual List<Node> GetNewPath() { return null; }
+    public virtual List<Node> GetNewPath(Vector2Int coordinate) { return null; }
+    
+    //public List<Node> GetNewPath()
+    //{
+    //    return GetNewPath(startCoordinates);
+    //}
+    //public List<Node> GetNewPath(Vector2Int coordinates)
+    //{
+    //    gridManager.ResetNodes();
+    //    BFS(coordinates);
+    //    return BuildPath();
+    //}
 
     void ExploreNeighbors()
     {

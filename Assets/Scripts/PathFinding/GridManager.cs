@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridManager : MonoBehaviour
+public class GridManager
 {
-    [SerializeField] Vector2Int gridSize;
-    [SerializeField] int unityGridSize = 10;
+    #region Variable
+    // 맵의 총 크기
+    private Vector2Int gridSize = new Vector2Int(8,8);
+    public Vector2Int GridSize { get { return gridSize; } set { gridSize = value; } }
+    // 격자의 크기
+    private int unityGridSize = 2;
     public int UnityGridSize{ get{ return unityGridSize; } }
-    Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
+    // 좌표가 키인 노드를 저장한 사전
+    private Dictionary<Vector2Int, Node> grid = new Dictionary<Vector2Int, Node>();
     public Dictionary<Vector2Int, Node> Grid { get { return grid; } }
-    void Awake()
+    // 경로를 찾는 함수
+    private PathFinder pathFinder =null;
+    public PathFinder PathFinder { get { return pathFinder; } set { pathFinder = value; } } 
+    #endregion
+
+    public void Init()
     {
-        CreateGrid();    
+        CreateGrid();
     }
 
     public Node GetNode(Vector2Int key)
@@ -19,7 +29,6 @@ public class GridManager : MonoBehaviour
         if (grid.ContainsKey(key))
             return grid[key];
         return null;
-        
     }
 
     public void BlockNode(Vector2Int coordinates)
