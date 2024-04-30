@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class UIHub : MonoBehaviour
 {
-    [SerializeField] private StartUI startUI;
-    [SerializeField] private EndUI endUI;
+    [SerializeField] public StartUI startUI;
+    [SerializeField] public EndUI endUI;
+    [SerializeField] public HPUI hpUI;
+    [SerializeField] public GoldUI goldUI;
+    [SerializeField] public TowerUI towerUI;
+    [SerializeField] public GameOverUI gameOverUI;
 
     private void Start()
     {

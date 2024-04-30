@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
     private UIManager uiM = new UIManager();
     public static UIManager UIM { get { return Instance.uiM; } }
     private SceneLoadManager sceneLM = new SceneLoadManager();
-    public static SceneLoadManager SceneLM { get { return Instance.sceneLM; } }
+    public static SceneLoadManager SceneLM { get { return instance.sceneLM; } }
     private static GridManager gridM = new GridManager();
     public static GridManager GridM { get { return gridM; } }
+    private SystemManager systemM = new SystemManager();
+    public static SystemManager SystemM { get { return instance.systemM; } }
     #endregion
 
     private void Awake()
@@ -26,7 +28,5 @@ public class GameManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
-
-        GridM.Init();
     }
 }

@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour
 {
     [Header("타일의 정보 입력")]
     [SerializeField] bool isPlaceable;
-    public bool IsPlaceable { get { return isPlaceable; } }
+    public bool IsPlaceable { get { return isPlaceable; } set { isPlaceable = value; } }
 
     private Vector2Int coordinates = new Vector2Int();
+    public Vector2Int Coordinate { get { return coordinates; } }
     private PathFinder pathFinder;
 
     private void Awake()
@@ -22,12 +24,14 @@ public class Tile : MonoBehaviour
         if (!isPlaceable) { GameManager.GridM.BlockNode(coordinates); }
     }
 
-
     void OnMouseDown()
     {
-        if (GameManager.GridM.GetNode(coordinates).isWalkable && !pathFinder.WillBlockPath(coordinates))
+        if (isPlaceable)
         {
-            Debug.Log("타워를 건설하다");
+            if (GameManager.GridM.GetNode(coordinates).canMoveNode && 
+                GameManager.GridM.PathFinder.CanBlock(coordinates) && 
+                !EventSystem.current.IsPointerOverGameObject())
+                GameManager.UIM.UIH.towerUI.OnOffUI(this);
         }
     }
 }

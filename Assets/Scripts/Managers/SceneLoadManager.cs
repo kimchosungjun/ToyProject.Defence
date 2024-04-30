@@ -11,8 +11,6 @@ public class SceneLoadManager
     /// <param name="_sceneName"></param>
     public void LoadScene(SceneName _sceneName)
     {
-        if (_sceneName == currentSceneName)
-            return;
         switch (_sceneName)
         {
             case SceneName.Lobby:

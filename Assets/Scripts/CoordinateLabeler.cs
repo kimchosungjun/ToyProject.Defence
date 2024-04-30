@@ -6,6 +6,8 @@ using TMPro;
 [RequireComponent(typeof(TextMeshPro))]
 public class CoordinateLabeler : MonoBehaviour
 {
+    [SerializeField] private bool isOnCoordinateFunc = false;
+
     [Header("색깔 : 하얀색(통로) / 회색(막힌통로) / 노랑색(지나온곳)")]
     [SerializeField] private Color defaultColor = Color.white;
     [SerializeField] private Color blockedColor = Color.gray;
@@ -20,16 +22,19 @@ public class CoordinateLabeler : MonoBehaviour
     {
         if(label==null)
             label = gameObject.GetComponent<TextMeshPro>();
-        //label.enabled = false;
-        DisplayCoordinates();
+        label.enabled = false;
+        //DisplayCoordinates();
     }
 
     void Update()
     {
-        DisplayCoordinates();
-        UpdateObjectName();
-        SetLabelColor();
-        ToggleLabels();
+        if (isOnCoordinateFunc)
+        {
+            DisplayCoordinates();
+            UpdateObjectName();
+            SetLabelColor();
+            ToggleLabels();
+        }
     }
 
     void ToggleLabels()

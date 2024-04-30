@@ -24,4 +24,16 @@ public class EasyPathFinder : PathFinder
         path =  GetNodeList();
         return path;
     }
+
+    public override List<Node> SearchRoute(Vector2Int coordinate)
+    {
+        List<Node> path = new List<Node>();
+        path = GetNodeList();
+        return path;
+    }
+
+    public override bool CanBlock(Vector2Int _coordinate)
+    {
+        return true;
+    }
 }

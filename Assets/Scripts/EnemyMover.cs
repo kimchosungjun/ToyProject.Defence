@@ -6,10 +6,11 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     #region Variable
-    [Header("적의 이동속도")]
-    [SerializeField] [Range(0f,5f)] private float speed = 1f;
-    [SerializeField] private Enemy enemy;
-    
+    [Header("컴포넌트")]
+    [SerializeField] private ScriptableEnemy enemyData;
+
+    private float moveSpeed = 0f;
+    public float MoveSpeed { set { moveSpeed = value; } }
     private List<Node> path = new List<Node>();
     private PathFinder pathFinder;
     public PathFinder PathFinder
@@ -25,13 +26,14 @@ public class EnemyMover : MonoBehaviour
     
     void OnEnable()
     {
+        moveSpeed = enemyData.moveSpeed;
         ReturnStartingPoint();
         RecalculatePath(true);
     }
 
     void ReturnStartingPoint()
     {
-        transform.position = GameManager.GridM.GetPositionFromCoordinates(PathFinder.StartCoordiantes);
+        transform.position = GameManager.GridM.GetPositionFromCoordinates(PathFinder.StartCoordiante);
     }
 
     void RecalculatePath(bool _isResetPath = true)
@@ -39,13 +41,13 @@ public class EnemyMover : MonoBehaviour
         Vector2Int coordinates = new Vector2Int();
 
         if (_isResetPath)
-            coordinates = PathFinder.StartCoordiantes;
+            coordinates = PathFinder.StartCoordiante;
         else
             coordinates = GameManager.GridM.GetCoordinatesFromPosition(transform.position);
 
         StopAllCoroutines();
         path.Clear();
-        path = PathFinder.SearchRoute();
+        path = PathFinder.SearchRoute(coordinates);
         StartCoroutine(FollowPath());
     }
 
@@ -53,15 +55,16 @@ public class EnemyMover : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        for(int i=1; i<path.Count; i++)
+        int pathCount = path.Count; 
+        for(int i=1; i<pathCount; i++)
         {
             Vector3 startPos = transform.position;
-            Vector3 endPos = GameManager.GridM.GetPositionFromCoordinates(path[i].coordinates);
+            Vector3 endPos = GameManager.GridM.GetPositionFromCoordinates(path[i].coordinate);
             float travelPercent = 0f;
             transform.LookAt(endPos);
             while(travelPercent<1f)
             {
-                travelPercent += Time.deltaTime * speed;
+                travelPercent += Time.deltaTime * moveSpeed;
                 transform.position = Vector3.Lerp(startPos, endPos, travelPercent);
                 yield return new WaitForEndOfFrame();
             }
@@ -71,7 +74,7 @@ public class EnemyMover : MonoBehaviour
 
     void FinishPath()
     {
-        //enemy.StealGold();
+        GameManager.SystemM.DecreaseHP(enemyData.damagePoint);
         gameObject.SetActive(false);
     }
 }

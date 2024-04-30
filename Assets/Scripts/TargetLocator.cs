@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class TargetLocator : MonoBehaviour
 {
-    [SerializeField] Transform weapon;
-    [SerializeField] ParticleSystem projectileParticles;
-    [SerializeField] float range = 15f;
-    Transform target;
+    [SerializeField] private Transform weapon;
+    [SerializeField] private GameObject[] arrowObjects;
+    [SerializeField] private float range = 15f;
+    [SerializeField] private float arrowSpeed = 0.01f;
+    [SerializeField] public ScriptableTower towerData;
+    private Transform target;
+    private bool canShoot = true;
 
     void Update()
     {
         FindClosetTarget();
-        AimWeapon();   
+        AimWeapon();
+        ArrowUpdate();
     }
 
-    void FindClosetTarget()
+    public void FindClosetTarget()
     {
         Enemy[] enemies = FindObjectsOfType<Enemy>();
         Transform closetTarget = null;
         float maxDist = Mathf.Infinity;
-        foreach(Enemy enemy in enemies)
+        foreach (Enemy enemy in enemies)
         {
             float targetDistancce = Vector3.Distance(transform.position, enemy.transform.position);
             if (targetDistancce < maxDist)
@@ -32,21 +36,52 @@ public class TargetLocator : MonoBehaviour
         target = closetTarget;
     }
 
-    void AimWeapon()
+    public void AimWeapon()
     {
         if (target == null)
             return;
         float targetDistance = Vector3.Distance(transform.position, target.position);
-        weapon.LookAt(target);
-        if (targetDistance < range)
-            Attack(true);
-        else
-            Attack(false);
+        if (targetDistance < range && canShoot)
+        {
+            weapon.LookAt(target);
+            Attack();
+        }
     }
 
-    void Attack(bool isActive)
+    public void Attack()
     {
-        var emissionModule = projectileParticles.emission;
-        emissionModule.enabled = isActive;
+        canShoot = false;
+        int count = arrowObjects.Length;
+        for (int idx = 0; idx < count; idx++)
+        {
+            if (arrowObjects[idx].activeSelf)
+                continue;
+            arrowObjects[idx].SetActive(true);
+            arrowObjects[idx].transform.LookAt(target);
+            StartCoroutine("CoolDown",towerData.attackCoolTime);
+            return;
+        }
+        GameObject go = Instantiate(arrowObjects[0], weapon.position, Quaternion.identity);
+        go.transform.parent = arrowObjects[0].transform.parent;
+        StartCoroutine("CoolDown", towerData.attackCoolTime);
+    }
+
+    public IEnumerator CoolDown(float _timer)
+    {
+        yield return new WaitForSeconds(_timer);
+        canShoot = true;
+    }
+
+    public void ArrowUpdate()
+    {
+        int count = arrowObjects.Length;
+        for(int idx=0; idx<count; idx++)
+        {
+            if (!arrowObjects[idx].activeSelf)
+                continue;
+            arrowObjects[idx].transform.position += arrowObjects[idx].transform.forward * arrowSpeed;
+            if (Vector3.Distance(arrowObjects[idx].transform.position, transform.position) > range)
+                arrowObjects[idx].SetActive(false);
+        }
     }
 }

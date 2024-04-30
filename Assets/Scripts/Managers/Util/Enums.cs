@@ -11,3 +11,15 @@ public enum SceneName
     Hard,
     Endding
 }
+
+public enum ArrowType
+{
+    Normal,
+    Slow
+}
+
+public enum UIType
+{
+    TowerUI,
+
+}

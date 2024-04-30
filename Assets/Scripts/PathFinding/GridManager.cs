@@ -7,7 +7,7 @@ public class GridManager
     #region Variable
     // ∏ ¿« √— ≈©±‚
     private Vector2Int gridSize = new Vector2Int(8,8);
-    public Vector2Int GridSize { get { return gridSize; } set { gridSize = value; } }
+    public Vector2Int GridSize { get { return gridSize; } set { gridSize = value; CreateGrid(); } }
     // ∞›¿⁄¿« ≈©±‚
     private int unityGridSize = 2;
     public int UnityGridSize{ get{ return unityGridSize; } }
@@ -18,11 +18,6 @@ public class GridManager
     private PathFinder pathFinder =null;
     public PathFinder PathFinder { get { return pathFinder; } set { pathFinder = value; } } 
     #endregion
-
-    public void Init()
-    {
-        CreateGrid();
-    }
 
     public Node GetNode(Vector2Int key)
     {
@@ -35,7 +30,7 @@ public class GridManager
     {
         if (grid.ContainsKey(coordinates))
         {
-            grid[coordinates].isWalkable = false;
+            grid[coordinates].canMoveNode = false;
         }
     }
 
@@ -44,8 +39,7 @@ public class GridManager
         foreach(KeyValuePair<Vector2Int,Node> entry in grid)
         {
             entry.Value.connectedTo = null;
-            entry.Value.isExplored = false;
-            entry.Value.isPath = false;
+            entry.Value.canVisitNode = false;
         }
     }
 
@@ -65,7 +59,7 @@ public class GridManager
         return position;
     }
 
-    void CreateGrid()
+    public void CreateGrid()
     {
         for(int x=0; x<gridSize.x; x++)
         {
