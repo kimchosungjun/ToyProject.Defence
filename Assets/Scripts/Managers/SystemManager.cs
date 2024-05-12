@@ -6,7 +6,8 @@ public class SystemManager
 {
     public int currentMoney = 0;
     public int currentHp = 0;
-
+    public float stageTimer = 0f;
+    
     #region Money Manage Method
     public void ChangeMoneyText(int _money)
     {
@@ -74,5 +75,9 @@ public class SystemManager
     {
         GameManager.UIM.UIH.gameOverUI.GameLose();
     }
+    #endregion
+
+    #region Timer
+
     #endregion
 }

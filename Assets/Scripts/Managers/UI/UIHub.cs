@@ -11,7 +11,7 @@ public class UIHub : MonoBehaviour
     [SerializeField] public TowerUI towerUI;
     [SerializeField] public GameOverUI gameOverUI;
 
-    private void Start()
+    private void Awake()
     {
         GameManager.UIM.UIH = this;
     }

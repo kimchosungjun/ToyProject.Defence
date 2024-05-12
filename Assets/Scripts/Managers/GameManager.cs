@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     #region Managers
-    [SerializeField ]private static GameManager instance;
+    private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
     private UIManager uiM = new UIManager();
     public static UIManager UIM { get { return Instance.uiM; } }
