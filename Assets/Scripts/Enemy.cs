@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ScriptableEnemy enemyData;
     [SerializeField] private EnemyMover enemyMover;
     private int currentHp;
-
+    private bool isCollideParticle = false;
     private void OnEnable()
     {
         currentHp = enemyData.healthPoint;
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void DeathEnemy()
     {
-        Debug.Log(enemyData.rewardMoney);
+        GameManager.SystemM.EarnMoney(enemyData.rewardMoney);
         gameObject.SetActive(false);
     }
 
@@ -41,13 +41,17 @@ public class Enemy : MonoBehaviour
             case ArrowType.Normal:
                 break;
             case ArrowType.Slow:
-                StartCoroutine(DeBuffTimer(_towerData.debuffTime, _towerData.decreaseValue));
+                DeBuffTimer(_towerData.decreaseValue);
                 break;
         }
     }
-    public IEnumerator DeBuffTimer(float _timer, int _decreaseValue)
+    public void DeBuffTimer(float _decreaseValue)
     {
         enemyMover.MoveSpeed = enemyData.moveSpeed-_decreaseValue;
+    }
+    public IEnumerator DeBuffTimerCor(float _timer, int _decreaseValue)
+    {
+        enemyMover.MoveSpeed = enemyData.moveSpeed - _decreaseValue;
         float currentTime = 0f;
         while (currentTime < _timer)
         {
@@ -55,6 +59,29 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
         enemyMover.MoveSpeed = enemyData.moveSpeed;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Arrow"))
+        {
+            HitByTower(other.GetComponent<ShotBullet>().towerData);
+            other.gameObject.SetActive(false);
+
+        }
+
+        if (other.CompareTag("P"))
+        {
+            HitByTower(other.GetComponent<ParticleBullet>().towerData);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("P"))
+        {
+            DeBuffTimer(-other.GetComponent<ParticleBullet>().towerData.decreaseValue);
+        }
     }
     #endregion
 }

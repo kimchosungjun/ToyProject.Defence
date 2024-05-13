@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bea1fa2a8e1178479450036638ac293, type: 3}
   m_Name: EasyStage
   m_EditorClassIdentifier: 
-  startHp: 0
-  startMoney: 0
-  stageTime: 0
+  startHp: 100
+  startMoney: 200
+  stageTime: 90
+  stageStartSize: {x: 8, y: 8}

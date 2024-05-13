@@ -5,6 +5,13 @@ using UnityEngine;
 public class EasyPathFinder : PathFinder
 {
     public GameObject[] routeList;
+
+    protected override void Start()
+    {
+        base.Start();
+        GetNodeList();
+    }
+
     public List<Node> GetNodeList()
     {
         List<Node> path = new List<Node>();
@@ -13,6 +20,8 @@ public class EasyPathFinder : PathFinder
         {
             Vector2Int coordinate = GameManager.GridM.GetCoordinatesFromPosition(routeList[i].transform.position);
             Node node = GameManager.GridM.GetNode(coordinate);
+            Tile currentTile = routeList[i].GetComponent<Tile>();
+            currentTile.IsPlaceable = false;
             path.Add(node);
         }
         return path;

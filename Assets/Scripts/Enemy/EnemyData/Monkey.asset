@@ -15,4 +15,4 @@ MonoBehaviour:
   moveSpeed: 1
   healthPoint: 5
   damagePoint: 5
-  rewardMoney: 20
+  rewardMoney: 25

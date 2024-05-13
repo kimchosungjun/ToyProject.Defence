@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: SlowTower
   m_EditorClassIdentifier: 
   towerObject: {fileID: 939335178, guid: 62c8e34b42dede54f8dea1d83a542319, type: 3}
-  damagePoint: 0
+  damagePoint: 1
   arrowType: 1
-  decreaseValue: 0
+  decreaseValue: 0.5
   debuffTime: 0
-  buildMoney: 0
-  sellMoney: 0
-  upgradeMoney: 0
+  attackCoolTime: 5
+  buildMoney: 50
+  sellMoney: 25
+  upgradeMoney: 50

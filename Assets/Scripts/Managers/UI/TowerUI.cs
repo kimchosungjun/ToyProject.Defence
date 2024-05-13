@@ -11,8 +11,9 @@ public class TowerUI : MonoBehaviour
         {
             // Áþ´Â´Ù.
             Vector3 buildPosition = GameManager.GridM.GetPositionFromCoordinates(currentTile.Coordinate);
-            Instantiate(_towerData.towerObject, buildPosition, Quaternion.identity);
+            Instantiate(_towerData.towerObject, buildPosition, Quaternion.identity);    
             currentTile.IsPlaceable = false;
+            GameManager.SystemM.DecreaseMoney(_towerData.buildMoney);
         }
         else
             return;

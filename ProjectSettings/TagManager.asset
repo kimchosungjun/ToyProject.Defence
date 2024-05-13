@@ -7,14 +7,17 @@ TagManager:
   - Path
   - Enemy
   - Arrow
+  - Pool
+  - ParticleBullet
+  - P
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Tile
   - Water
   - UI
-  - 
+  - Pool
   - 
   - 
   - 

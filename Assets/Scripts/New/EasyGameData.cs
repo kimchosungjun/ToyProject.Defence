@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class EasyGameData : MonoBehaviour
 {
-    public int stageStartHP;
-    public int stageStartMoney;
-    public Vector2Int stageStartSize;
+    public ScriptableStage stageData;
 
     public void Awake()
     {
@@ -16,8 +14,15 @@ public class EasyGameData : MonoBehaviour
     public IEnumerator SetData()
     {
         yield return new WaitForEndOfFrame();
-        GameManager.SystemM.SetHP(stageStartHP);
-        GameManager.SystemM.SetMoney(stageStartMoney);
-        GameManager.GridM.GridSize = stageStartSize;
+        GameManager.SystemM.SetHP(stageData.startHp);
+        GameManager.SystemM.SetMoney(stageData.startMoney);
+        GameManager.SystemM.SetTimer(stageData.stageTime);
+        GameManager.GridM.GridSize = stageData.stageStartSize;
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+            GameManager.SystemM.WinGame();
     }
 }

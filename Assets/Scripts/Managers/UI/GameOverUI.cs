@@ -14,6 +14,7 @@ public class GameOverUI : MonoBehaviour
     {
         gameObject.SetActive(true);
         endingText.text = "승리했습니다!!";
+        //GameManager.UIM.UIH.timerUI.StopTimer();
     }
 
     private void OnEnable()

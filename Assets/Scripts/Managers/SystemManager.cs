@@ -78,6 +78,15 @@ public class SystemManager
     #endregion
 
     #region Timer
+    public void StartGame()
+    {
+        GameManager.UIM.UIH.timerUI.StartTimer();
+    } 
 
+    public void SetTimer(float _timer)
+    {
+        stageTimer = _timer;
+        GameManager.UIM.UIH.timerUI.SetTimer(_timer);
+    }
     #endregion
 }

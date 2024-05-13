@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ccaf9008d0cb847800ff64a07d696a, type: 3}
   m_Name: Bird
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 1.5
   healthPoint: 2
   damagePoint: 3
-  rewardMoney: 25
+  rewardMoney: 10

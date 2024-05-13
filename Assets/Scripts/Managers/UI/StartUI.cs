@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StartUI : MonoBehaviour
 {
-    public void StartGame() { GameManager.SceneLM.LoadScene(SceneName.Hard); }
+    public void StartEasyMode() { GameManager.SceneLM.LoadScene(SceneName.Easy); }
+    public void StartHardMode() { GameManager.SceneLM.LoadScene(SceneName.Hard); }
     public void ResumeGame() {  }
 }

@@ -21,7 +21,7 @@ public class HardPathFinder : PathFinder
     {
         base.Start();
         grid = GameManager.GridM.Grid;
-       // startNode = grid[startCoordinate];
+        // startNode = grid[startCoordinate];
         destinationNode = grid[destinationCoordinate];
     }
 

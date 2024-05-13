@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class Tile : MonoBehaviour
 {
     [Header("타일의 정보 입력")]
+    public Material mat;
     [SerializeField] bool isPlaceable;
     public bool IsPlaceable { get { return isPlaceable; } set { isPlaceable = value; } }
 
@@ -22,14 +23,15 @@ public class Tile : MonoBehaviour
     {
         if(pathFinder==null) { pathFinder= GameManager.GridM.PathFinder; }
         if (!isPlaceable) { GameManager.GridM.BlockNode(coordinates); }
+       
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         if (isPlaceable)
         {
-            if (GameManager.GridM.GetNode(coordinates).canMoveNode && 
-                GameManager.GridM.PathFinder.CanBlock(coordinates) && 
+            if (GameManager.GridM.GetNode(coordinates).canMoveNode &&
+                GameManager.GridM.PathFinder.CanBlock(coordinates) &&
                 !EventSystem.current.IsPointerOverGameObject())
                 GameManager.UIM.UIH.towerUI.OnOffUI(this);
         }

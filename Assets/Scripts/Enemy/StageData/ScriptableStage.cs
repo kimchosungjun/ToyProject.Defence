@@ -6,4 +6,5 @@ public class ScriptableStage : ScriptableObject
     public int startHp;
     public int startMoney;
     public float stageTime;
+    public Vector2Int stageStartSize;
 }

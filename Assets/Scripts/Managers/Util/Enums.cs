@@ -23,3 +23,8 @@ public enum UIType
     TowerUI,
 
 }
+public enum EnemyType
+{
+    Monkey = 0,
+    Bird = 1
+}

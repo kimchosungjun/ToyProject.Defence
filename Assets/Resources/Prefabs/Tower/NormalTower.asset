@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: NormalTower
   m_EditorClassIdentifier: 
   towerObject: {fileID: 939335178, guid: b7c840302c20e4a42afedfae83600438, type: 3}
-  damagePoint: 0
+  damagePoint: 3
   arrowType: 0
   decreaseValue: 0
   debuffTime: 0
-  buildMoney: 0
-  sellMoney: 0
-  upgradeMoney: 0
+  attackCoolTime: 1
+  buildMoney: 50
+  sellMoney: 25
+  upgradeMoney: 50

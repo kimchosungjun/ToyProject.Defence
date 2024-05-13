@@ -27,7 +27,6 @@ public class EnemyMover : MonoBehaviour
     void OnEnable()
     {
         moveSpeed = enemyData.moveSpeed;
-        ReturnStartingPoint();
         RecalculatePath(true);
     }
 
@@ -76,5 +75,10 @@ public class EnemyMover : MonoBehaviour
     {
         GameManager.SystemM.DecreaseHP(enemyData.damagePoint);
         gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        ReturnStartingPoint();
     }
 }
