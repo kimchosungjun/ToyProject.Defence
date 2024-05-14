@@ -8,6 +8,7 @@ public class EasyGameData : MonoBehaviour
 
     public void Awake()
     {
+        GameManager.GridM.GridSize = stageData.stageStartSize;
         StartCoroutine(SetData());
     }
 
@@ -17,12 +18,5 @@ public class EasyGameData : MonoBehaviour
         GameManager.SystemM.SetHP(stageData.startHp);
         GameManager.SystemM.SetMoney(stageData.startMoney);
         GameManager.SystemM.SetTimer(stageData.stageTime);
-        GameManager.GridM.GridSize = stageData.stageStartSize;
-    }
-
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-            GameManager.SystemM.WinGame();
     }
 }
