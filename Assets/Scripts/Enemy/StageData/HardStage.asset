@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHp: 100
   startMoney: 200
-  stageTime: 90
+  stageTime: 30
   stageStartSize: {x: 8, y: 8}
